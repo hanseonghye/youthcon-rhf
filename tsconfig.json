@@ -18,9 +18,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "types": [
+      "@emotion/react/types/css-prop"
+    ],
+    "incremental": true,
+    "baseUrl": "./",
+    "paths" : {
+      "component/*": ["src/components/*"],
+      "container/*": ["src/containers/*"],
+      "style/*": ["src/styles/*"],
+      "util/*": ["src/utils/*"],
+    }
   },
   "include": [
-    "src"
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
