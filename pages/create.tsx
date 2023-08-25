@@ -10,13 +10,9 @@ import { ResumeProps } from 'util/type';
 import { useForm, FormProvider } from 'react-hook-form';
 import FloatingBox from 'container/floatingBox';
 import { defaultResumeData } from 'util/defaultData';
-import { useEffect, useState } from 'react';
-import { countCharactersRecursively } from 'util/func';
 
 const Create = () => {
   const resumeForm = useForm<ResumeProps>({ mode: 'onChange', defaultValues: defaultResumeData });
-  const [valueCount, setValueCount] = useState(0);
-  const watchedFields = resumeForm.watch();
 
   const MAX_COUNT = 400;
 
@@ -27,11 +23,6 @@ const Create = () => {
   const onError = (data: Record<string, any>) => {
     console.log(data);
   };
-
-  useEffect(() => {
-    const count = countCharactersRecursively(resumeForm.getValues(), MAX_COUNT);
-    setValueCount(count);
-  }, [watchedFields]);
 
   return (
     <Container>
@@ -52,7 +43,7 @@ const Create = () => {
           </form>
         </FormProvider>
       </Grid>
-      <FloatingBox submitTrigger={resumeForm.handleSubmit(onSubmit, onError)} count={(Math.min(valueCount, MAX_COUNT) / MAX_COUNT) * 100} />
+      <FloatingBox submitTrigger={resumeForm.handleSubmit(onSubmit, onError)} count={(Math.min(0, MAX_COUNT) / MAX_COUNT) * 100} />
     </Container>
   );
 };

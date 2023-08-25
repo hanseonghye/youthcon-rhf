@@ -23,8 +23,6 @@ const preferredSkills = [
 ];
 
 const SkillBox = () => {
-  const { control } = useFormContext<ResumeProps>();
-
   return (
     <Grid item css={skilBoxLayout}>
       <BoxHeader title="스킬" />
@@ -39,49 +37,31 @@ const SkillBox = () => {
           같은 직무의 서류 합격 이력서에서 많이 사용된 스킬입니다. 스킬을 추가해보세요!
         </Typography>
         <Stack direction="row" display="block">
-          <Controller
-            control={control}
-            name="skills"
-            render={({ field: { value, onChange } }) => (
-              <>
-                {preferredSkills.map((skill, index) => (
-                  <Chip
-                    className="skillChip"
-                    variant={value.findIndex((v) => v.key === skill.key) > -1 ? 'filled' : 'outlined'}
-                    key={`preferredSkills_${index}`}
-                    label={skill.label}
-                    onClick={() => {
-                      if (value.findIndex((v) => v.key === skill.key) > -1) onChange(value.filter((value) => value.key !== skill.key));
-                      else onChange([...value, { ...skill }]);
-                    }}
-                    icon={value.findIndex((v) => v.key === skill.key) > -1 ? <DoneIcon /> : <AddIcon />}
-                  />
-                ))}
-              </>
-            )}
-          />
-        </Stack>
-      </Grid>
-      <Controller
-        control={control}
-        name="skills"
-        render={({ field: { value, onChange } }) => (
           <>
-            {value.map((skill, index) => (
+            {preferredSkills.map((skill, index) => (
               <Chip
                 className="skillChip"
-                variant="filled"
-                key={`choicedSkills_${index}`}
+                variant={true ? 'filled' : 'outlined'}
+                key={`preferredSkills_${index}`}
                 label={skill.label}
                 onClick={() => {
-                  onChange(value.filter((value) => value.key !== skill.key));
+                  //이미 선택된 경우 빼고, 없을경우 추가
                 }}
-                icon={<ClearIcon />}
+                icon={true ? <DoneIcon /> : <AddIcon />}
               />
             ))}
           </>
-        )}
-      />
+        </Stack>
+      </Grid>
+      {/*선택된 skills*/}
+      {/*<Chip*/}
+      {/*  className="skillChip"*/}
+      {/*  variant="filled"*/}
+      {/*  onClick={() => {*/}
+      {/*    //  skills에서 빼기*/}
+      {/*  }}*/}
+      {/*  icon={<ClearIcon />}*/}
+      {/*/>*/}
     </Grid>
   );
 };
