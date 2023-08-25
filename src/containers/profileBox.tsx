@@ -49,30 +49,8 @@ const ProfileBox = () => {
         />
       </Grid>
       <Grid item>
-        <Controller
-          control={control}
-          name="profile.phone"
-          rules={{
-            required: true,
-            validate: (value) => {
-              const regex = /\d{3}-\d{3,4}-\d{4}/;
-              if (!regex.test(value)) return '연락처 형식을 확인해주세요.';
-
-              return true;
-            },
-          }}
-          render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
-            <TextField
-              variant="standard"
-              placeholder="연락처(필수) ex) 010-0000-0000"
-              value={value}
-              onChange={onChange}
-              error={!!(value && invalid)}
-              helperText={error?.message}
-              fullWidth
-            />
-          )}
-        />
+        {/*정규식 : const regex = /\d{3}-\d{3,4}-\d{4}/; */}
+        <TextField variant="standard" placeholder="연락처(필수) ex) 010-0000-0000" error={true} helperText="" fullWidth />
       </Grid>
     </Grid>
   );
