@@ -1,14 +1,10 @@
 import { Box, Grid, TextField } from '@mui/material';
 import BoxHeader from 'component/boxHeader';
 import HelpCard from 'component/helpCard';
-import { Control, Controller } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
+import { Controller, useFormContext } from 'react-hook-form';
 
-interface Props {
-  control: Control<ResumeProps>;
-}
-
-const IntroductionBox = ({ control }: Props) => {
+const IntroductionBox = () => {
+  const { control } = useFormContext();
   return (
     <Grid item>
       <BoxHeader title="간단 소개글" />

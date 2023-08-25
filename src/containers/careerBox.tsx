@@ -1,17 +1,14 @@
 import { Button, Grid, Stack } from '@mui/material';
 import BoxHeader from 'component/boxHeader';
 import HelpCard from 'component/helpCard';
-import { Control, useFieldArray } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ResumeProps } from 'util/type';
 import AddIcon from '@mui/icons-material/Add';
 import { defaultCareerData } from 'util/defaultData';
 import CareerCard from 'container/careerCard';
 
-interface Props {
-  control: Control<ResumeProps>;
-}
-
-const CareerBox = ({ control }: Props) => {
+const CareerBox = () => {
+  const { control } = useFormContext<ResumeProps>();
   const { fields, append, remove } = useFieldArray<ResumeProps>({ control, name: 'careers' });
 
   return (

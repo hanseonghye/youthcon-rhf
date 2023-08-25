@@ -1,14 +1,10 @@
 import { Grid, TextField } from '@mui/material';
-import { Controller, Control } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
+import { Controller, useFormContext } from 'react-hook-form';
 
-interface Props {
-  control: Control<ResumeProps>;
-}
-
-const TitleBox = ({ control }: Props) => {
+const TitleBox = () => {
+  const { control } = useFormContext();
   return (
-    <Grid item>
+    <Grid item paddingBottom={5}>
       <Controller
         control={control}
         name="title"

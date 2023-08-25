@@ -1,14 +1,11 @@
 import { Grid, TextField } from '@mui/material';
-import { Control, Controller } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
+import { Controller, useFormContext } from 'react-hook-form';
 
-interface Props {
-  control: Control<ResumeProps>;
-}
+const ProfileBox = () => {
+  const { control } = useFormContext();
 
-const ProfileBox = ({ control }: Props) => {
   return (
-    <Grid item container direction="column">
+    <Grid item container direction="column" paddingBottom={5}>
       <Grid item>
         <Controller
           control={control}

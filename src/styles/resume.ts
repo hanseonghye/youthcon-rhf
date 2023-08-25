@@ -51,10 +51,6 @@ export const careerCardLayout = css`
     }
   }
 
-  &:hover {
-    background-color: rgba(217, 217, 217, 0.15);
-  }
-
   .addProject {
     font-weight: 600;
     font-size: 16px;

@@ -7,15 +7,16 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TitleBox from 'container/titleBox';
 import SkillBox from 'container/skillBox';
 import { ResumeProps } from 'util/type';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import FloatingBox from 'container/floatingBox';
 import { defaultResumeData } from 'util/defaultData';
 import { useEffect, useState } from 'react';
+import { countCharactersRecursively } from 'util/func';
 
 const Create = () => {
-  const { control, watch, handleSubmit, getValues } = useForm<ResumeProps>({ mode: 'onChange', defaultValues: defaultResumeData });
+  const resumeForm = useForm<ResumeProps>({ mode: 'onChange', defaultValues: defaultResumeData });
   const [valueCount, setValueCount] = useState(0);
-  const watchedFields = watch();
+  const watchedFields = resumeForm.watch();
 
   const MAX_COUNT = 400;
 
@@ -28,33 +29,9 @@ const Create = () => {
   };
 
   useEffect(() => {
-    const count = countCharactersRecursively(getValues());
+    const count = countCharactersRecursively(resumeForm.getValues(), MAX_COUNT);
     setValueCount(count);
   }, [watchedFields]);
-
-  const countCharactersRecursively = (value: any) => {
-    if (typeof value === 'string') {
-      return value.length;
-    } else if (Array.isArray(value)) {
-      let totalCharacters = 0;
-      for (const item of value) {
-        totalCharacters += countCharactersRecursively(item);
-        if (totalCharacters > MAX_COUNT) break;
-      }
-
-      return totalCharacters;
-    } else if (typeof value === 'object' && value !== null) {
-      let totalCharacters = 0;
-      for (const key in value)
-        if (key in value) {
-          totalCharacters += countCharactersRecursively(value[key]);
-          if (totalCharacters > MAX_COUNT) break;
-        }
-
-      return totalCharacters;
-    }
-    return 0;
-  };
 
   return (
     <Container>
@@ -62,16 +39,20 @@ const Create = () => {
         <Grid item>
           <Stack className="tip1" direction="row" gap={1}>
             <InfoOutlinedIcon fontSize="small" />
-            <Typography>블라블라 무슨 문구를 넣을까요</Typography>
+            <Typography>🔪퇴를 위한 React Hook Form</Typography>
           </Stack>
         </Grid>
-        <TitleBox control={control} />
-        <ProfileBox control={control} />
-        <IntroductionBox control={control} />
-        <CareerBox control={control} />
-        <SkillBox control={control} />
+        <FormProvider {...resumeForm}>
+          <form>
+            <TitleBox />
+            <ProfileBox />
+            <IntroductionBox />
+            <CareerBox />
+            <SkillBox />
+          </form>
+        </FormProvider>
       </Grid>
-      <FloatingBox submitTrigger={handleSubmit(onSubmit, onError)} count={(Math.min(valueCount, MAX_COUNT) / MAX_COUNT) * 100} />
+      <FloatingBox submitTrigger={resumeForm.handleSubmit(onSubmit, onError)} count={(Math.min(valueCount, MAX_COUNT) / MAX_COUNT) * 100} />
     </Container>
   );
 };
