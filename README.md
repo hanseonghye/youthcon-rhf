@@ -27,6 +27,19 @@ localhost:3000 으로 접속해 보세요 !
 - react-hook-form ❤️
 
 
+### ✅ 코드 구조
+```
+pages/
+    create.tsx
+
+src/
+    components/
+    containers/
+    styles/
+    utils/
+```
+
+
 ### ✅ 우리가 구현할 폼 타입은 !
 ```typescript
 export interface ResumeProps {
