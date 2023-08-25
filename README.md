@@ -77,25 +77,25 @@ import { Control, Controller } from 'react-hook-form';
 
   const { control } = useForm();
 
-  <Controller
-    //우리가 사용할 form의 control을 넘겨줘요.
-    control={control}
-    //form에서 사용할 key
-    name="name"
-    //유효성 체크
-    rules={{ required: true, maxLength: { value: 10, message: '10글자 이하로 입력해주세요.' } }}
-    //렌더링 부분
-    render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
-      <TextField
-        variant="standard"
-        placeholder="이름 (필수)"
-        value={value}
-        onChange={onChange}
-        error={invalid}
-        helperText={error?.message}
-        fullWidth
-      />
+  return (
+    <Controller
+      //우리가 사용할 form의 control을 넘겨줘요.
+      control={control}
+      //form에서 사용할 key
+      name="name"
+      //유효성 체크
+      rules={{ required: true, maxLength: { value: 10, message: '10글자 이하로 입력해주세요.' } }}
+      //렌더링 부분
+      render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
+        <TextField
+          variant="standard"
+          placeholder="이름 (필수)"
+          value={value}
+          onChange={onChange}
+          error={invalid}
+          helperText={error?.message}
+        />
     )}
-
+  )
 
 ```
