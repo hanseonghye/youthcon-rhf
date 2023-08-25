@@ -1,46 +1,100 @@
-# Getting Started with Create React App
+# 🔪퇴를 위한 React Hook Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### ✅ Before Start
 
-In the project directory, you can run:
+#### 0. node.js 가 설치 되어있는지 확인해주세요.
+` node -v`
 
-### `npm start`
+#### 1. install package
+` yarn install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 2. running dev mode
+` yarn dev`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+localhost:3000 으로 접속해 보세요 !
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### ✅ 개발 환경
+- typescript
+- next.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- mui/material ui
+- emotion
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- react-hook-form ❤️
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### ✅ 우리가 구현할 폼 타입은 !
+```typescript
+export interface ResumeProps {
+  title: string;
+  profile: ProfileProps;
+  introduction: string;
+  careers: CareerProps[];
+  skills: { key: string; label: string }[];
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export interface ProfileProps {
+  name: string;
+  email: string;
+  phone: string;
+}
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export interface CareerProps {
+  date: {
+    startYear: string;
+    startMonth: string;
+    endYear: string;
+    endMonth: string;
+  };
+  isCurrent: boolean;
+  companyName: string;
+  department: string;
+  projects: ProjectProps[];
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export interface ProjectProps {
+  title: string;
+  date: {
+    startYear: string;
+    startMonth: string;
+    endYear: string;
+    endMonth: string;
+  };
+  description: string;
+}
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### ✅ RHF의 Control & Controller 를 사용할 거예요
+```typescript
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+import { Control, Controller } from 'react-hook-form';
+
+  const { control } = useForm();
+
+  <Controller
+    //우리가 사용할 form의 control을 넘겨줘요.
+    control={control}
+    //form에서 사용할 key
+    name="name"
+    //유효성 체크
+    rules={{ required: true, maxLength: { value: 10, message: '10글자 이하로 입력해주세요.' } }}
+    //렌더링 부분
+    render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
+      <TextField
+        variant="standard"
+        placeholder="이름 (필수)"
+        value={value}
+        onChange={onChange}
+        error={invalid}
+        helperText={error?.message}
+        fullWidth
+      />
+    )}
+
+
+```
