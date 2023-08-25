@@ -4,9 +4,6 @@ import HelpCard from 'component/helpCard';
 import { skilBoxLayout } from 'style/resume';
 import DoneIcon from '@mui/icons-material/Done';
 import AddIcon from '@mui/icons-material/Add';
-import ClearIcon from '@mui/icons-material/Clear';
-import { Controller, useFormContext } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
 
 const preferredSkills = [
   { label: 'MySQL', key: 'mysql' },
