@@ -1,16 +1,10 @@
 import { Button, Grid, Stack } from '@mui/material';
 import BoxHeader from 'component/boxHeader';
 import HelpCard from 'component/helpCard';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
 import AddIcon from '@mui/icons-material/Add';
-import { defaultCareerData } from 'util/defaultData';
 import CareerCard from 'container/careerCard';
 
 const CareerBox = () => {
-  const { control } = useFormContext<ResumeProps>();
-  const { fields, append, remove } = useFieldArray<ResumeProps>({ control, name: 'careers' });
-
   return (
     <Grid item>
       <BoxHeader title="경력" />
@@ -21,13 +15,11 @@ const CareerBox = () => {
         ]}
       />
       <Stack display="block" paddingTop={1} spacing={5}>
-        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => append(defaultCareerData)} sx={{ float: 'right' }}>
+        <Button variant="outlined" startIcon={<AddIcon />} sx={{ float: 'right' }}>
           추가하기
         </Button>
         <Stack spacing={1}>
-          {fields.map((field, index) => (
-            <CareerCard index={index} key={field.id} careerRemove={() => remove(index)} />
-          ))}
+          <CareerCard />
         </Stack>
       </Stack>
     </Grid>

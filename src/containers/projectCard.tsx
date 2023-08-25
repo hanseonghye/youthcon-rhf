@@ -1,7 +1,5 @@
 import { Grid, TextField } from '@mui/material';
 import DateInputField from 'component/dateInputField';
-import { Controller, useFormContext } from 'react-hook-form';
-import { ResumeProps } from 'util/type';
 import ClearIcon from '@mui/icons-material/Clear';
 
 interface Props {
@@ -10,46 +8,20 @@ interface Props {
   remove: () => void;
 }
 
-const ProjectCard = ({ careerIndex, index, remove }: Props) => {
-  const { control } = useFormContext<ResumeProps>();
+const ProjectCard = () => {
   return (
     <Grid item xs={10}>
       <Grid item container>
         <Grid item container direction="row">
           <Grid item xs={11}>
-            <Controller
-              control={control}
-              name={`careers.${careerIndex}.projects.${index}.title`}
-              render={({ field: { value, onChange } }) => (
-                <TextField variant="standard" placeholder="주요 성과" value={value} onChange={onChange} fullWidth />
-              )}
-            />
+            <TextField variant="standard" placeholder="주요 성과" fullWidth />
           </Grid>
           <Grid item xs={1}>
-            <ClearIcon fontSize="small" onClick={remove} />
+            <ClearIcon fontSize="small" />
           </Grid>
         </Grid>
-        <Controller
-          control={control}
-          name={`careers.${careerIndex}.projects.${index}.date`}
-          render={({ field: { value, onChange } }) => (
-            <DateInputField
-              startYear={value.startYear}
-              startMonth={value.startMonth}
-              endYear={value.endYear}
-              endMonth={value.endMonth}
-              onChange={(fieldName, fieldValue) => onChange({ ...value, [fieldName]: fieldValue })}
-              required
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name={`careers.${careerIndex}.projects.${index}.description`}
-          render={({ field: { value, onChange } }) => (
-            <TextField variant="standard" placeholder="상세 업무 내용과 성과를 기입해주세요." value={value} onChange={onChange} fullWidth />
-          )}
-        />
+        <DateInputField startYear="" startMonth="" endYear="" endMonth="" onChange={(fieldName, fieldValue) => null} required />
+        <TextField variant="standard" placeholder="상세 업무 내용과 성과를 기입해주세요." fullWidth />
       </Grid>
     </Grid>
   );
