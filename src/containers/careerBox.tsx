@@ -26,7 +26,7 @@ const CareerBox = () => {
         </Button>
         <Stack spacing={1}>
           {fields.map((field, index) => (
-            <CareerCard index={index} control={control} key={field.id} remove={() => remove(index)} />
+            <CareerCard index={index} key={field.id} careerRemove={() => remove(index)} />
           ))}
         </Stack>
       </Stack>
