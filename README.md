@@ -3,8 +3,9 @@
 
 ### ✅ Before Start
 
-#### 0. node.js 가 설치 되어있는지 확인해주세요.
+#### 0. node.js와 yarn이 설치 되어있는지 확인해주세요.
 ` node -v`
+` yarn --version`
 
 #### 1. install package
 ` yarn install`
