@@ -70,10 +70,10 @@ export interface ProjectProps {
 ```
 
 
-### ✅ RHF의 Control & Controller 를 사용할 거예요
+### ✅ RHF의 useForm & Controller 를 사용할 거예요
 ```typescript
 
-import { Control, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
   const { control } = useForm();
 
