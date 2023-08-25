@@ -113,7 +113,7 @@ const CareerCard = ({ index, careerRemove }: Props) => {
             </Button>
             <Stack gap={3}>
               {fields.map((field, projectIndex) => (
-                <ProjectCard key={field.id} careerIndex={index} index={projectIndex} control={control} remove={() => remove(index)} />
+                <ProjectCard key={field.id} careerIndex={index} index={projectIndex} remove={() => remove(projectIndex)} />
               ))}
             </Stack>
           </Grid>
