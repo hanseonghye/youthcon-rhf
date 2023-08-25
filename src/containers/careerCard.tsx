@@ -2,27 +2,22 @@ import { Button, Checkbox, Grid, Stack, TextField, Typography } from '@mui/mater
 import { careerCardLayout } from 'style/resume';
 import DateInputField from 'component/dateInputField';
 import ProjectCard from 'container/projectCard';
-import { Control, Controller, useFieldArray, useWatch } from 'react-hook-form';
+import { Controller, useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { ResumeProps } from 'util/type';
 import ClearIcon from '@mui/icons-material/Clear';
 import { defaultProjectData } from 'util/defaultData';
 
 interface Props {
   index: number;
-  control: Control<ResumeProps>;
-  remove: () => void;
+  careerRemove: () => void;
 }
 
-const CareerCard = ({ index, control, remove }: Props) => {
-  const {
-    fields,
-    append,
-    remove: projectRemove,
-  } = useFieldArray<ResumeProps>({
+const CareerCard = ({ index, careerRemove }: Props) => {
+  const { control } = useFormContext<ResumeProps>();
+  const { fields, append, remove } = useFieldArray<ResumeProps>({
     control,
     name: `careers.${index}.projects`,
   });
-
   const isCurrentWorking = useWatch({ control, name: `careers.${index}.isCurrent` });
 
   return (
@@ -92,7 +87,7 @@ const CareerCard = ({ index, control, remove }: Props) => {
                   />
                 </Grid>
                 <Grid item xs={1}>
-                  <ClearIcon onClick={remove} />
+                  <ClearIcon onClick={careerRemove} />
                 </Grid>
               </Grid>
               <Grid item>
@@ -118,7 +113,7 @@ const CareerCard = ({ index, control, remove }: Props) => {
             </Button>
             <Stack gap={3}>
               {fields.map((field, projectIndex) => (
-                <ProjectCard key={field.id} careerIndex={index} index={projectIndex} control={control} remove={() => projectRemove(index)} />
+                <ProjectCard key={field.id} careerIndex={index} index={projectIndex} control={control} remove={() => remove(index)} />
               ))}
             </Stack>
           </Grid>
