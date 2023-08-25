@@ -1,17 +1,17 @@
 import { Grid, TextField } from '@mui/material';
 import DateInputField from 'component/dateInputField';
-import { Controller, Control } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { ResumeProps } from 'util/type';
 import ClearIcon from '@mui/icons-material/Clear';
 
 interface Props {
   careerIndex: number;
   index: number;
-  control: Control<ResumeProps>;
   remove: () => void;
 }
 
-const ProjectCard = ({ careerIndex, index, control, remove }: Props) => {
+const ProjectCard = ({ careerIndex, index, remove }: Props) => {
+  const { control } = useFormContext<ResumeProps>();
   return (
     <Grid item xs={10}>
       <Grid item container>
