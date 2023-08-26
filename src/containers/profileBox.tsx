@@ -7,6 +7,7 @@ const ProfileBox = () => {
         <TextField variant="standard" placeholder="이름 (필수)" error={false} helperText="" fullWidth />
       </Grid>
       <Grid item>
+        {/*정규식 : /\S+@\S+\.\S+/,*/}
         <TextField variant="standard" placeholder="이메일 (필수)" error={false} helperText="" fullWidth />
       </Grid>
       <Grid item>
